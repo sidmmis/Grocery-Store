@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.29/angular-ui-router.min.js"></script>
+    <script src="groc.js"></script>
+    <style>
+      #img1 {
+        width: max-content;
+        height: 650px;
+      }
+      #img2 {
+        width: max-content;
+        height: 650px;
+      }
+      #img3 {
+        width: max-content;
+        height: 650px;
+      }
+      #choco :hover {
+        height: 60px;
+      }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="ProductsController">
+
+
+    <nav class="navbar navbar-expand-xxl navbar-dark bg-dark ">
+        
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><h1>APNI DUKAAN</h1></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item ml-3">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item dropdown ml-3">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Filter
+                </a>
+                
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Price</a></li>
+                  <li><a class="dropdown-item" href="#">Item</a></li>
+                  
+                </ul>
+              </li>
+
+              <li class="nav-item ml-3">
+                <button style="font-size:24px"> <a ui-sref="Cart" ng-click="cart()" >Cart</a><i class="fa fa-shopping-cart"></i></button>
+              </li>
+              
+              <li class="nav-item ml-">
+                <a class="nav-link active" aria-current="page" href="#">Contact</a>
+              </li>
+
+            </ul>
+            <form class="d-flex mr-4">
+              <input class="form-control me-2 " type="search" placeholder="Search" style="width: 450px;" aria-label="Search">
+              <button class="btn btn-success" type="submit" ng-click="search()">Search</button>
+                         
+            </form>
+            <div class="dropdown ml-3">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                SIGN IN
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" ui-sref="LogIn">Sign In</a></li>
+                <li><a class="dropdown-item" ui-sref="Register">Sign Up</a></li>
+              </ul>
+            </div>
+            <button id="logout" class="btn ml-2" ng-click="logout()" style="color: white;"><a ui-sref="LogIn">Sign Out</a></button>
+          </div>
+        </div>
+      </nav>
+
+
+<div class="text-center mt-1">
+    <nav class="navbar navbar-light bg-light">
+      <button type="button" class="btn btn-secondary btn-lg">VEGETABLES</button>
+<button type="button" class="btn btn-secondary btn-lg">FRUITS</button>
+<button type="button" class="btn btn-secondary btn-lg">CHOCOLATES</button>
+<button type="button" class="btn btn-secondary btn-lg">KITCHEN</button>
+<button type="button" class="btn btn-secondary btn-lg">DAILY ESSENTIALS</button>
+</nav>
+</div>
+
+
+
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://t3.ftcdn.net/jpg/03/35/61/78/360_F_335617818_D6XfmNhtCyDRTOvK9GXFkNYs3nyLKvfO.jpg" class="d-100 w-100" id="img1">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>First slide label</h5>
+        <p>Some representative placeholder content for the first slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://t3.ftcdn.net/jpg/03/35/74/56/360_F_335745675_MaxYxSsadrviZdThITuHB2oCohYOiwEu.jpg" class="d-100 w-100" id="img2" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Second slide label</h5>
+        <p>Some representative placeholder content for the second slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://t4.ftcdn.net/jpg/01/13/76/75/360_F_113767529_ij6S3k2rMWlBA4fIj4xbNAKa2BYV8W7h.jpg" class="d-100 w-100" id="img3" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+
+
+<br><br>
+
+
+
+
+
+<div class="mt-5 ml-4 mr-lg-4" style="font-size: 30px;">
+<nav class="navbar navbar-light bg-light nav justify-content-center"><h3> CHOCOLATES </h3>
+</nav></div>
+
+
+
+      <div class="row row-cols-1 row-cols-md-4 g-2 ml-4 mr-4" id="choco">
+        <div class="col" >
+          <div class="card h-100">
+            <img src="https://e1.pxfuel.com/desktop-wallpaper/112/50/desktop-wallpaper-dairy-milk-silk-chocolate-itl-cat-dairy-milk-silk-thumbnail.jpg" style="height: 300px;" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Dairy Milk</h5>
+              <h5>Rs 400</h5>
+              <button type="button" class="btn btn-secondary btn-lg">Buy Now</button>
+              <button type="button" class="btn btn-primary btn-lg">Add to Cart</button>
+               <!-- Button trigger modal -->
+               <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Details.
+             </button>
+
+            <!-- Modal -->
+           <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                <div class="modal-body">
+                ...     
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+             </div>
+           </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://beta.ems.ladbiblegroup.com/s3/content/a52a73365a8180e9277b92ea692790ef.png" style="height: 300px;" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Kitkat</h5>
+              <h5>Rs 200</h5>
+              <button type="button" class="btn btn-secondary btn-lg">Buy Now</button>
+              <button type="button" class="btn btn-primary btn-lg">Add to Cart</button>  
+            <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                 Details.
+              </button>
+
+             <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                   <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                 <div class="modal-body">
+                 ...     
+                 </div>
+                 <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                 </div>
+                 </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://c4.wallpaperflare.com/wallpaper/951/122/444/cupcakes-chocolate-cream-dessert-wallpaper-preview.jpg" style="height: 300px;" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Cup Cake</h5>
+              <h5>Rs 200</h5>
+              <button type="button" class="btn btn-secondary btn-lg">Buy Now</button>
+              <button type="button" class="btn btn-primary btn-lg">Add to Cart</button> 
+              <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Details.
+             </button>
+
+            <!-- Modal -->
+           <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                <div class="modal-body">
+                ...     
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+             </div>
+           </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+              <img src="https://payload.cargocollective.com/1/2/65929/9601169/Nestle-Alpino_Anushree9_670.jpg" style="height: 300px;" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Alpino</h5>
+                <h5>Rs 180</h5>
+                <button type="button" class="btn btn-secondary btn-lg">Buy Now</button>
+                <button type="button" class="btn btn-primary btn-lg">Add to Cart</button>     
+                <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  Details.
+               </button>
+ 
+              <!-- Modal -->
+             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+               <div class="modal-dialog">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                   </div>
+                  <div class="modal-body">
+                  ...     
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                  </div>
+               </div>
+             </div>          </div>
+            </div>
+          </div>
+      </div>
+
+<br><br>
+
+
+      <div class="nav justify-content-center mt-lg-5 ">
+        <h1 class="card-title">Products In Demand</h1>
+      </div>
+      <div class="row row-cols-1 row-cols-md-4 g-2 ml-4 mr-4 justify-content-center mt-lg-2" id="choco">
+        <div class="col" >
+          <div class="card h-100">
+            <img src="https://www.bigbasket.com/media/uploads/p/l/1214680-2_1-maggi-maha-2-minute-masala-noodles-happy-share-pack-90g-pack-of-6.jpg" style="height: 300px;" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Maggie</h5>
+              <h5>Rs 45</h5>
+              <button type="button" class="btn btn-secondary btn-lg">Buy Now</button>
+              <button type="button" class="btn btn-primary btn-lg">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://m.media-amazon.com/images/I/61qM-ZCVe0L.jpg" style="height: 300px;" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Cadbury Celebrations</h5>
+              <h5>Rs 200</h5>
+              <button type="button" class="btn btn-secondary btn-lg">Buy Now</button>
+              <button type="button" class="btn btn-primary btn-lg">Add to Cart</button>            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://www.basketcreations.co.nz/cdn/shop/files/BeautifulGiftBaskets_1400x.jpg?v=1677277149" style="height: 300px;" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Gift Hamper</h5>
+              <h5>Rs 350</h5>
+              <button type="button" class="btn btn-secondary btn-lg">Buy Now</button>
+              <button type="button" class="btn btn-primary btn-lg">Add to Cart</button> 
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+<br><br>
+
+
+      <div class=" mt-5 ml-4 mr-4" style="font-size: 30px;">
+<nav class="navbar navbar-light bg-light nav justify-content-center " > <h3>VEGETABLES</h3>
+</nav></div>
+
+
+<div class="row row-cols-1 row-cols-md-4 g-2 ml-4 mr-4" id="choco">
+    <div class="col" >
+      <div class="card h-100">
+        <img src="https://media.istockphoto.com/id/1369929551/photo/organic-tomatoes-sale-on-market-stall.webp?b=1&s=170667a&w=0&k=20&c=kthPbp3qnma_YCzvM8ImsqmDVBLdq8AqK6sh2JM7oaE=" style="height: 300px;" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Tomatoes</h5>
+          <h5>Rs 100 perKg</h5>
+          <button type="button" class="btn btn-secondary btn-lg">Buy Now</button>
+                <button type="button" class="btn btn-primary btn-lg">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <img src="https://c1.wallpaperflare.com/preview/609/966/511/pea-peas-vegetables-green.jpg" style="height: 300px;" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Hari Matar</h5>
+          <h5>Rs 40 perKg</h5>
+          <button type="button" class="btn btn-secondary btn-lg">Buy Now</button>
+          <button type="button" class="btn btn-primary btn-lg">Add to Cart</button>        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <img src="https://www.orgpick.com/cdn/shop/products/Organic-Onion_large_b56c7be1-0215-410a-9ef5-cb89d00b126b.jpg?v=1571986561" style="height: 300px;" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Onion</h5>
+          <h5>Rs 30 perKg</h5>
+          <button type="button" class="btn btn-secondary btn-lg">Buy Now</button>
+          <button type="button" class="btn btn-primary btn-lg">Add to Cart</button>        </div>
+      </div>
+    </div>
+    <div class="col">
+        <div class="card h-100">
+          <img src="https://seasonalfoodguide.org/img/vegetable-chili-peppers-350x184.5f6efe16.jpg " style="height: 300px;" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Chilli</h5>
+            <h5>Rs 20 per100gm</h5>
+            <button type="button" class="btn btn-secondary btn-lg">Buy Now</button>
+            <button type="button" class="btn btn-primary btn-lg">Add to Cart</button>          </div>
+        </div>
+      </div>
+  </div>
+
+
+
+
+ 
+    
+
+</body>
+</html>

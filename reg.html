@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+  <title>Register</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.29/angular-ui-router.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script>
+  <script src="groc.js"></script>
+  <style>
+    #image {
+        background-image: url("https://www.wallpapers13.com/wp-content/uploads/2015/12/space-Abstract-Galaxy-planet-rings-stars-HD-Wallpaper-1087-1920x1440.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+  </style>
+</head>
+<body ng-app="myApp" ng-controller="RegisterController">
+    
+      <section class="vh-100" style="background-color: #eee;">
+        <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+              <div class="card text-black" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                  <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+      
+                      <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Apni Dukaan <br> <h3 class="text-center">Register Here</h3></p>
+      
+                      <form class="mx-1 mx-md-4" ng-submit="registerform">
+      
+                        <div class="d-flex flex-row align-items-center mb-4">
+                          <div class="form-outline flex-fill mb-0">
+                            <input type="text" id="form3Example1c" ng-model="username" class="form-control" />
+                            <label class="form-label" for="form3Example1c">Your Name</label>
+                          </div>
+                        </div>
+      
+                        <div class="d-flex flex-row align-items-center mb-4">
+                          <div class="form-outline flex-fill mb-0">
+                            <input type="email" id="form3Example3c" ng-model="email" class="form-control" />
+                            <label class="form-label" for="form3Example3c">Your Email</label>
+                          </div>
+                        </div>
+      
+                        <div class="d-flex flex-row align-items-center mb-4">
+                          <div class="form-outline flex-fill mb-0">
+                            <input type="password" id="form3Example4c" ng-model="password" class="form-control" required />
+                            <label class="form-label" for="form3Example4c">Password</label>
+                          </div>
+                        </div>
+      
+                        <div class="d-flex flex-row align-items-center mb-4">
+                          <div class="form-outline flex-fill mb-0">
+                            <input type="password" id="form3Example4cd" ng-model="confpassword" class="form-control" ng-change="validatePassword()" required/>
+                            <label class="form-label" for="form3Example4cd">Confirm Password</label>
+                            <div class="text-danger" ng-show="myForm.confpassword.$dirty && myForm.confpassword.$error.required">Confirm Password is Required</div>
+                             <div class="text-danger" ng-show="passwordMismatch">
+                               Password do not match.
+                             </div>
+                          </div>
+                        </div>
+      
+                             
+                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                          <button type="submit" class="btn btn-primary btn-lg" ng-click="Register()"><a ui-sref="/LogIn">Register</button>
+                        </div>
+
+                        <div class="text-center">
+                          Already have an account? <a ui-sref="LogIn">LogIn</a>
+                        </div>
+      
+                      </form>
+      
+                    </div>
+                    <div class="col-md-6 col-lg-5 d-none d-md-block" id="image">
+                        
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+</body>
+</html>

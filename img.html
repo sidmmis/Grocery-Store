@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div ng-app="groceryApp" ng-controller="ProductController">
+        <form ng-submit="addProduct()" enctype="multipart/form-data">
+          <label for="productName">Product Name:</label>
+          <input type="text" id="productName" ng-model="newProduct.name" required>
+          
+          <label for="productDetails">Product Details:</label>
+          <textarea id="productDetails" ng-model="newProduct.details" required></textarea>
+          
+          <label for="productImages">Product Images:</label>
+          <input type="file" id="productImages" ng-file-select multiple>
+          
+          <button type="submit" id="Add">Add Product</button>
+        </form>
+      
+        <div ng-repeat="product in products">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.details }}</p>
+          <div ng-repeat="image in product.images">
+            <img ng-src="{{ image.url }}" alt="{{ image.name }}">
+          </div>
+      
+          <button ng-click="deleteProduct(product)">Delete</button>
+          <button ng-click="showUpdateForm(product)">Update</button>
+      
+          <div ng-if="product.showUpdateForm">
+            <form ng-submit="updateProduct(product)">
+              <label for="updateProductName">Product Name:</label>
+              <input type="text" id="updateProductName" ng-model="product.updatedName" required>
+              
+              <label for="updateProductDetails">Product Details:</label>
+              <textarea id="updateProductDetails" ng-model="product.updatedDetails" required></textarea>
+              
+              <button type="submit">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+       
+</body>
+</html>

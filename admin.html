@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.27/angular-ui-router.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script> -->
+    <script src="groc.js"></script>
+    <style>
+        #cover {
+    border-radius: 2%;
+    width: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 3%;
+    border-color: black;
+    border: 1px solid black;
+}
+#text {
+    border-radius: 20px;
+    width: 60%;
+    height: 60px;
+    font-size: 18px;
+    margin-left: 45px;
+    padding: 7px;
+}
+#button {
+    background-color: aqua;
+    border-radius: 15px;
+    width: auto;
+    height: 56px;
+    font-size: 30px;
+    margin-left: 5px;
+}
+#object {
+  display: flex;
+  text-align: center;
+  margin-left: 38%;
+}
+#button1 {
+  border-radius: 20px;
+  width: 180px;
+  height: 45px;
+}
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="CartController">
+    <nav class="navbar navbar-expand-xxl navbar-dark bg-dark ">
+        
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><h1>APNI DUKAAN</h1></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item ml-3">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item dropdown ml-3">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Filter
+                </a>
+                
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Price</a></li>
+                  <li><a class="dropdown-item" href="#">Item</a></li>
+                  
+                </ul>
+              </li>
+              <li class="nav-item ml-">
+                <a class="nav-link active" aria-current="page" href="#">Contact</a>
+              </li>
+
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" style="width: 450px;" placeholder="Search" aria-label="Search">
+              <button class="btn btn-success mr-5" type="submit" ng-click="search()">Search</button>
+                         
+            </form>
+            <div class=" ml-3">
+                
+                 <a ui-sref="Products">LOG OUT</a>
+                
+            </div>
+
+          </div>
+        </div>
+      </nav>
+
+
+
+      <div id="cover">
+        <h1 class="text-center mb-5">SECTION MANAGEMENT</h1>
+        <form class="justify-content-center row col-3" ng-submit="addSection()" enctype="multipart/form-data" id="object">
+
+          <label for="productName">Product Id:</label>
+          <input type="number" id="productId" ng-model="newProduct.id" required> 
+
+            <label for="productName" class="mt-4">Product Name:</label>
+            <input type="text" id="productName" ng-model="newProduct.name" required>
+            
+            <label for="productDetails" class="mt-4">Product Details:</label>
+            <textarea id="productDetails" ng-model="newProduct.details" required></textarea>
+            
+            <label for="productImages" class="mt-4">Product Images:</label>
+            <input type="file" id="productImages" file-upload ng-model="newProduct.images"  multiple>
+            
+            <button type="submit" id="button1" class="btn btn-primary mt-4 mb-3">Add Product</button>
+          </form>
+        
+          <div ng-repeat="product in products">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.details }}</p>
+            <div ng-repeat="image in product.images">
+              <img ng-src="{{ image.image }}" alt="{{ image.name }}">
+            </div>
+        
+            <button ng-click="deleteProduct(product)" class="btn btn-primary">Delete</button>
+            <button ng-click="showUpdateForm(product)" class="btn btn-primary">Update</button>
+        
+            <div ng-if="product.showUpdateForm">
+              <form ng-submit="updateProduct(product)">
+                <label for="updateProductName">Product Name:</label>
+                <input type="text" id="updateProductName" ng-model="product.updatedName" required>
+                
+                <label for="updateProductDetails">Product Details:</label>
+                <textarea id="updateProductDetails" ng-model="product.updatedDetails" required></textarea>
+                
+                <button type="submit" class="btn btn-primary ml-2">Update</button>
+              </form>
+            </div>
+          </div> 
+        </div>
+
+<br><br>
+        <div id="cover">
+          <h1 class="text-center mb-5">PRODUCT MANAGEMENT</h1>
+          <form class="justify-content-center row col-3" ng-submit="addProduct()" enctype="multipart/form-data" id="object">
+  
+            <label for="productName">Product Id:</label>
+            <input type="number" id="categoryId" ng-model="newCategory.id" required> 
+  
+              <label for="productName" class="mt-4">Product Name:</label>
+              <input type="text" id="categoryName" ng-model="newCategory.name" required>
+              
+              <label for="productDetails" class="mt-4">Product Details:</label>
+              <textarea id="categoryDetails" ng-model="categoryegory.details" required></textarea>
+
+              <label for="productName" class="mt-4">Manufacture Date:</label>
+              <input type="date" id="categoryName" ng-model="newCategory.manu" required>
+
+              <label for="productName" class="mt-4">Expiry Date:</label>
+              <input type="date" id="categoryName" ng-model="newCategory.exp" required>
+
+              <label for="productName" class="mt-4">Rate per Unit(kg/letter-spacing):</label>
+              <input type="number" id="categoryName" ng-model="newCategory.money" placeholder="Rs" required>
+
+              <label for="productName" class="mt-4">Quantity:</label>
+              <input type="number" id="categoryName" ng-model="newCategory.quantity" required>
+              
+              <label for="productImages" class="mt-4">Product Images:</label>
+              <input type="file" id="categoryImages" file-upload ng-model="newCategory.images"  multiple>
+              
+              <button type="submit" id="button1" class="btn btn-primary mt-4 mb-3">Add Product</button>
+            </form>
+
+</body>
+</html
