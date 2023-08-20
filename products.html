@@ -24,9 +24,12 @@
         width: max-content;
         height: 650px;
       }
-      #choco :hover {
-        height: 60px;
+      #dynamic {
+        display: flex;
+        flex-direction: row;
+        overflow: auto;
       }
+     
     </style>
 </head>
 <body ng-app="myApp" ng-controller="ProductsController">
@@ -55,10 +58,11 @@
                   
                 </ul>
               </li>
-
+              <!-- <div  ng-repeat="product in products" > -->
               <li class="nav-item ml-3">
-                <button style="font-size:24px"> <a ui-sref="Cart" ng-click="cart()" >Cart</a><i class="fa fa-shopping-cart"></i></button>
+                <button style="font-size:24px"> <a ui-sref="Cart" ng-click="cart()" >Cart {{product.product_id}}</a><i class="fa fa-shopping-cart"></i></button>
               </li>
+              
               
               <li class="nav-item ml-">
                 <a class="nav-link active" aria-current="page" href="#">Contact</a>
@@ -66,8 +70,15 @@
 
             </ul>
             <form class="d-flex mr-4">
-              <input class="form-control me-2 " type="search" placeholder="Search" style="width: 450px;" aria-label="Search">
+              <input class="form-control me-2 " ng-model="searchitem" type="search" placeholder="Search" style="width: 450px;" aria-label="Search">
               <button class="btn btn-success" type="submit" ng-click="search()">Search</button>
+
+
+            <ul>
+                 <li ng-repeat="item in data | filter:searchitem">{{ item }}</li>
+             </ul>
+
+
                          
             </form>
             <div class="dropdown ml-3">
@@ -168,22 +179,7 @@
              </button>
 
             <!-- Modal -->
-           <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-             <div class="modal-dialog">
-               <div class="modal-content">
-                 <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                <div class="modal-body">
-                ...     
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-                </div>
-             </div>
-           </div>
+          
             </div>
           </div>
         </div>
@@ -201,22 +197,6 @@
               </button>
 
              <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                   <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                 <div class="modal-body">
-                 ...     
-                 </div>
-                 <div class="modal-footer">
-                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                 </div>
-                 </div>
-              </div>
-            </div>
             </div>
           </div>
         </div>
@@ -233,22 +213,7 @@
              </button>
 
             <!-- Modal -->
-           <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-             <div class="modal-dialog">
-               <div class="modal-content">
-                 <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                <div class="modal-body">
-                ...     
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-                </div>
-             </div>
-           </div>
+          
             </div>
           </div>
         </div>
@@ -264,23 +229,8 @@
                   Details.
                </button>
  
-              <!-- Modal -->
-             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-               <div class="modal-dialog">
-                 <div class="modal-content">
-                   <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                   </div>
-                  <div class="modal-body">
-                  ...     
-                  </div>
-                  <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-                  </div>
-               </div>
-             </div>          </div>
+             
+             </div>
             </div>
           </div>
       </div>
@@ -374,16 +324,53 @@
             <h5 class="card-title">Chilli</h5>
             <h5>Rs 20 per100gm</h5>
             <button type="button" class="btn btn-secondary btn-lg">Buy Now</button>
-            <button type="button" class="btn btn-primary btn-lg">Add to Cart</button>          </div>
+            <button type="button" class="btn btn-primary btn-lg">Add to Cart</button>        
+            </div>
         </div>
       </div>
   </div>
 
 
-
-
- 
-    
+  <div class="mt-5 ml-4 mr-4" style="font-size: 30px;">
+    <nav class="navbar navbar-light bg-light nav justify-content-center " > <h3>CHIPS</h3>
+    </nav></div>
+<div class="row row-cols-1 row-cols-md-4 g-2 ml-4 mr-4">
+  <div  ng-repeat="product in products" >
+    <div class="col">
+    <div  class="justify-content-center row col-12, card h-100">
+      <img  ng-src="https://10.21.84.45:8000/media/{{product.Image}}" alt="{{product.about}}" style="height: 180px; width: 290px;" >
+      <div class="card-body">
+      <h5>{{product.Productname}}</h5>
+      <!-- <p> Details: {{ product.About}}</p>
+      <p> Manufacture Date: {{ product.Manufacturedate}}</p> -->
+      <p> </p>
+          <button type="button" class="btn btn-secondary btn-lg">Rs{{ product.Rate}}</button>
+          <button type="button" class="btn btn-primary btn-lg" ng-click="cartgo($index)">Add to Cart</button> 
+          <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Details.
+         </button>
+         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+               <h5 class="modal-title" id="staticBackdropLabel">Description</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+             <div class="modal-body">
+             {{product.About}}
+             </div>
+             <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+             </div>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+   
 
 </body>
 </html>
