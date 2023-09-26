@@ -74,7 +74,7 @@ app.controller('RegisterController',function($scope,$http,$window,$state){
 
 		if(pass == confpass){
 			
-			$http.post('https://10.21.84.45:8000/register/', regdata)
+			$http.post('https://10.21.83.49:8000/register/', regdata)
           .then(function(response){
             
             console.log(response.data);
@@ -113,7 +113,7 @@ app.controller('LogInController',['$scope', '$http','$state', function($scope, $
 	$scope.logout = function(){
 
 	//	LoadingService.startLoading();
-	$http.post('https://10.21.84.45:8000/logout/',{
+	$http.post('https://10.21.83.49.160:8000/logout/',{
 		headers: {'Content-Type': undefined},
 		withCredentials: true
 	})
@@ -147,7 +147,7 @@ app.controller('LogInController',['$scope', '$http','$state', function($scope, $
 		};
 	
      console.log(data);
-		$http.post('https://10.21.84.45:8000/login/', data , {
+		$http.post('https://10.21.83.49:8000/signin/', data , {
 		headers: {'Content-Type': undefined},
 		withCredentials: true
 
@@ -214,7 +214,7 @@ app.controller('LogInController',['$scope', '$http','$state', function($scope, $
 	$scope.newCategory=[];
 	$scope.cart = [];
 	
-	$http.get('https://10.21.84.45:8000/showproduct/', {
+	$http.get('https://10.21.83.49:8000/showproduct/', {
 		//transformRequest: angular.identity,
 	   // headers: {'Content-Type': undefined},
 		withCredentials: true 
@@ -245,7 +245,7 @@ app.controller('LogInController',['$scope', '$http','$state', function($scope, $
 			product_id : product
 		}	
 			
-			$http.post('https://10.21.84.45:8000/addtocart/', data,{
+			$http.post('https://10.21.83.49:8000/addtocart/', data,{
 				withCredentials: true 
 		})
 		.then(function(response){
@@ -285,7 +285,7 @@ app.controller('LogInController',['$scope', '$http','$state', function($scope, $
 	  $scope.product = [];
 	 // $scope.images = " ";
 
-	 $http.get('https://10.21.84.45:8000/category/', {
+	 $http.get('https://10.21.83.49:8000/category/', {
 	 //transformRequest: angular.identity,
 	// headers: {'Content-Type': undefined},
 	 withCredentials: true 
@@ -315,7 +315,7 @@ app.controller('LogInController',['$scope', '$http','$state', function($scope, $
 			//formdata.append('')
 			console.log(formdata);
 			
-			$http.post('https://10.21.84.45:8000/category/', formdata, {
+			$http.post('https://10.21.83.49:8000/category/', formdata, {
 				transformRequest: angular.identity,
 		    	headers: {'Content-Type': undefined},
 				withCredentials: true
@@ -352,7 +352,7 @@ app.controller('LogInController',['$scope', '$http','$state', function($scope, $
 		var dlt = {
 			categoryid : product.Categoryid
 		}
-		$http.delete('https:10.21.84.45:8000/category/', dlt ,{
+		$http.delete('https://10.21.83.49:8000/category/', dlt ,{
 			//headers: {'Content-Type': undefined},
 			withCredentials: true
 			})
@@ -407,7 +407,7 @@ $scope.updatedData = function(product) {
 			// }
 			console.log(editinput);
 
-	$http.post('https:10.21.84.45:8000/updatecategory/', editinput,{
+	$http.post('https://10.21.83.49:8000/updatecategory/', editinput,{
 	//headers: {'Content-Type': undefined},
 	withCredentials: true
 	})
@@ -438,7 +438,7 @@ app.controller('ProductAddController',['$scope', '$state', '$http', function($sc
 	$scope.product=[];
 	$scope.newCategory=[];
 	
-	$http.get('https://10.21.84.45:8000/product/', {
+	$http.get('https://10.21.83.49:8000/product/', {
 		//transformRequest: angular.identity,
 	   // headers: {'Content-Type': undefined},
 		withCredentials: true 
@@ -476,7 +476,7 @@ app.controller('ProductAddController',['$scope', '$state', '$http', function($sc
 			formdata.append('image', file);
 	
 			console.log(formdata);
-			$http.post('https:10.21.84.45:8000/product/', formdata, {
+			$http.post('https://10.21.83.49:8000/product/', formdata, {
 				transformRequest: angular.identity,
 					headers: {'Content-Type': undefined},
 					withCredentials: true
@@ -537,7 +537,7 @@ app.controller('ProductAddController',['$scope', '$state', '$http', function($sc
 		
 					console.log(editinput);
 		
-			$http.post('https:10.21.84.45:8000/updateproduct/', editinput,{
+			$http.post('https://10.21.83.49:8000/updateproduct/', editinput,{
 			//headers: {'Content-Type': undefined},
 			withCredentials: true
 			})
@@ -568,7 +568,7 @@ app.controller('ProductAddController',['$scope', '$state', '$http', function($sc
 			}
 
 			console.log(dlt);
-			$http.delete('https:10.21.84.45:8000/product/',dlt, {
+			$http.delete('https://10.21.83.49:8000/product/',dlt, {
 				headers: {'Content-Type': undefined},
 				withCredentials : true
 			})
@@ -590,7 +590,7 @@ app.controller('ProductAddController',['$scope', '$state', '$http', function($sc
 
 	$scope.product=[];
 
-	$http.get('https:10.21.84.45:8000/addtocart/', {
+	$http.get('https://10.21.83.49:8000/addtocart/', {
 		//headers: {'Content-Type': undefined},
 		withCredentials: true
 	})
